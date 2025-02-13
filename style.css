@@ -24,85 +24,19 @@ body {
     margin-bottom: 20px;
 }
 
-/* Collapsed state */
+/* Sidebar collapsed state with placeholder */
 .sidebar.collapsed {
-    width: 0;
-    padding: 0;
-    display: none;
+    width: 60px; /* Reduced width for the collapsed sidebar */
+    padding: 10px 0;
 }
 
-/* Sidebar button for collapsing */
+/* Sidebar toggle button, below the "PO Platform" */
 .sidebar-toggle {
     background-color: #34495e;
     color: white;
     padding: 10px;
-    margin: 10px;
+    margin: 10px 0;
     border: none;
     cursor: pointer;
     border-radius: 5px;
-    position: fixed; /* Fix button position outside sidebar */
-    top: 20px;
-    left: 20px;
-}
-
-.sidebar-toggle:hover {
-    background-color: #16a085;
-}
-
-/* Main content area */
-.main-content {
-    flex-grow: 1;
-    padding: 40px;
-    overflow-y: auto;
-    background-color: white; /* Background for content area is white */
-}
-
-.container {
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-h1, h2 {
-    font-weight: 500;
-    color: #2c3e50;
-}
-
-/* Textarea styling */
-textarea {
-    width: 100%;
-    height: 150px;
-    margin-bottom: 20px;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background-color: #f4f4f4; /* Light grey input field */
-    resize: none;
-}
-
-/* Button styling */
-button {
-    background-color: #16a085;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-    margin-top: 20px;
-}
-
-button:hover {
-    background-color: #1abc9c;
-}
-
-/* Code block styling */
-pre {
-    background-color: #2d3436;
-    color: white;
-    padding: 20px;
-    border-radius: 5px;
-    font-family: monospace;
-    white-space: pre-wrap;
-    word-wrap: break-word;
-    margin-bottom: 30px;
-}
+    position:
