@@ -5,38 +5,45 @@ function generateACC() {
         return;
     }
 
-    // Extract key parts of the user story
+    // Split user story into lines
     const lines = userStory.split("\n");
-    let actor = "the user"; // Default if no role is found
+    let role = "";
     let goal = "";
     let benefit = "";
     let requirements = [];
 
+    // Extract key parts
     lines.forEach(line => {
-        if (line.toLowerCase().includes("as a")) {
-            actor = line.replace("As a", "").trim();
-        } else if (line.toLowerCase().includes("i want to")) {
-            goal = line.replace("I WANT TO", "").trim();
-        } else if (line.toLowerCase().includes("so i can")) {
-            benefit = line.replace("SO I CAN", "").trim();
+        const lowerLine = line.toLowerCase();
+
+        if (lowerLine.startsWith("as a")) {
+            role = line.replace(/^As a/i, "").trim();
+        } else if (lowerLine.startsWith("i want to")) {
+            goal = line.replace(/^I WANT TO/i, "").trim();
+        } else if (lowerLine.startsWith("so i can")) {
+            benefit = line.replace(/^SO I CAN/i, "").trim();
         } else if (line.startsWith("-")) {
-            requirements.push(line.trim());
+            requirements.push(line.replace("-", "").trim());
         }
     });
 
-    // Construct Acceptance Criteria
-    let acc = `Scenario: ${goal || "Feature Implementation"}\n`;
-    acc += `Given ${actor} is using the system\n`;
-    acc += `When they attempt to ${goal}\n`;
-    acc += `Then they should be able to achieve ${benefit}\n`;
+    // Handle missing user story parts
+    if (!role) role = "the user";
+    if (!goal) goal = "perform an action";
+    if (!benefit) benefit = "achieve the expected outcome";
+
+    // Construct ACC with improved wording
+    let acc = `Scenario: ${goal.charAt(0).toUpperCase() + goal.slice(1)}\n`;
+    acc += `Given ${role} is in the system and meets necessary preconditions\n`;
+    acc += `When ${role} attempts to ${goal}\n`;
+    acc += `Then ${benefit}\n`;
 
     if (requirements.length > 0) {
-        acc += `\nAdditional Conditions:\n`;
-        requirements.forEach(req => {
-            acc += `- ${req}\n`;
+        acc += `\nAcceptance Criteria:\n`;
+        requirements.forEach((req, index) => {
+            acc += `${index + 1}. ${req}\n`;
         });
     }
 
     document.getElementById('accOutput').value = acc;
 }
-
