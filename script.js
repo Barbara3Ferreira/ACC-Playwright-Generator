@@ -52,15 +52,16 @@ function generateACC() {
 function toggleSidebar() {
     const sidebar = document.querySelector('.sidebar');
     const mainContent = document.querySelector('.main-content');
-    
+
     // Toggle the collapsed class on the sidebar
     sidebar.classList.toggle('collapsed');
 
     // Adjust main content width dynamically
     if (sidebar.classList.contains('collapsed')) {
         mainContent.style.marginLeft = "60px";
+        mainContent.style.width = "calc(100% - 60px)";
     } else {
         mainContent.style.marginLeft = "250px";
+        mainContent.style.width = "calc(100% - 250px)";
     }
 }
-
