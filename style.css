@@ -18,12 +18,8 @@ body {
     flex-direction: column;
     justify-content: space-between;
     transition: width 0.3s ease;
-}
-
-.sidebar h2 {
-    color: #ecf0f1;
-    font-weight: 500;
-    margin-bottom: 20px;
+    position: fixed;
+    height: 100%;
 }
 
 /* Sidebar collapsed */
@@ -66,61 +62,13 @@ body {
     overflow-y: auto;
     background-color: white;
     transition: margin-left 0.3s ease;
-    max-width: 1000px; /* Set a max width for centering */
-    margin: 0 auto; /* Centers content horizontally */
+    margin-left: 250px; /* Default spacing when sidebar is expanded */
+    width: calc(100% - 250px);
 }
 
-/* When sidebar is collapsed, the content should take up more space */
-.sidebar.collapsed + .main-content {
-    width: calc(100% - 60px); /* Expand content when sidebar is collapsed */
-    margin-left: auto; /* Ensures centering */
-    margin-right: auto;
+/* ✅ Use `~` instead of `+` to always target main content */
+.sidebar.collapsed ~ .main-content {
+    margin-left: 60px; /* Moves content when sidebar is collapsed */
+    width: calc(100% - 60px);
 }
 
-/* Container for inputs */
-.container {
-    max-width: 800px;
-    margin: 0 auto;
-    text-align: left;
-}
-
-/* Input field styling */
-textarea {
-    width: 100%;
-    height: 150px;
-    margin-bottom: 20px;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background-color: #f4f4f4;
-    resize: none;
-}
-
-/* Button styling */
-button {
-    background-color: #16a085;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-    margin-top: 20px;
-    transition: all 0.3s ease;
-}
-
-button:hover {
-    background-color: #1abc9c;
-}
-
-/* Code block styling */
-pre {
-    background-color: #2d3436;
-    color: white;
-    padding: 20px;
-    border-radius: 5px;
-    font-family: monospace;
-    white-space: pre-wrap;
-    word-wrap: break-word;
-    margin-bottom: 30px;
-}
