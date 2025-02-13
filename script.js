@@ -26,22 +26,6 @@ function generateACC() {
             requirements.push(line.replace("-", "").trim());
         }
     });
-    
-    function toggleSidebar() {
-    const sidebar = document.querySelector('.sidebar');
-    const mainContent = document.querySelector('.main-content');
-    
-    // Toggle the collapsed class on the sidebar
-    sidebar.classList.toggle('collapsed');
-
-    // Adjust main content width dynamically
-    if (sidebar.classList.contains('collapsed')) {
-        mainContent.style.marginLeft = "60px";
-    } else {
-        mainContent.style.marginLeft = "250px";
-    }
-});
-
 
     // Handle missing user story parts
     if (!role) role = "the user";
@@ -63,3 +47,20 @@ function generateACC() {
 
     document.getElementById('accOutput').value = acc;
 }
+
+// ✅ Move toggleSidebar() outside of generateACC()
+function toggleSidebar() {
+    const sidebar = document.querySelector('.sidebar');
+    const mainContent = document.querySelector('.main-content');
+    
+    // Toggle the collapsed class on the sidebar
+    sidebar.classList.toggle('collapsed');
+
+    // Adjust main content width dynamically
+    if (sidebar.classList.contains('collapsed')) {
+        mainContent.style.marginLeft = "60px";
+    } else {
+        mainContent.style.marginLeft = "250px";
+    }
+}
+
