@@ -41,3 +41,14 @@ test.describe('Generated Test for User Story', () => {
     // Display the generated Playwright test code
     document.getElementById('playwrightTest').textContent = playwrightTest;
 }
+
+// Function to toggle the sidebar visibility
+function toggleSidebar() {
+    const sidebar = document.querySelector('.sidebar');
+    const isCollapsed = sidebar.classList.contains('collapsed');
+    if (isCollapsed) {
+        sidebar.classList.remove('collapsed');
+    } else {
+        sidebar.classList.add('collapsed');
+    }
+}
