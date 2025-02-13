@@ -66,11 +66,15 @@ body {
     overflow-y: auto;
     background-color: white;
     transition: margin-left 0.3s ease;
-    width: calc(100% - 250px); /* Adjusted width */
+    max-width: 1000px; /* Set a max width for centering */
+    margin: 0 auto; /* Centers content horizontally */
 }
 
+/* When sidebar is collapsed, the content should take up more space */
 .sidebar.collapsed + .main-content {
     width: calc(100% - 60px); /* Expand content when sidebar is collapsed */
+    margin-left: auto; /* Ensures centering */
+    margin-right: auto;
 }
 
 /* Container for inputs */
