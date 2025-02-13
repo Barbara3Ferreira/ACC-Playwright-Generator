@@ -26,6 +26,7 @@ function generateACC() {
             requirements.push(line.replace("-", "").trim());
         }
     });
+    
     function toggleSidebar() {
     const sidebar = document.querySelector('.sidebar');
     const mainContent = document.querySelector('.main-content');
@@ -39,7 +40,7 @@ function generateACC() {
     } else {
         mainContent.style.marginLeft = "250px";
     }
-}
+});
 
 
     // Handle missing user story parts
