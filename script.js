@@ -1,4 +1,3 @@
-// Function to generate Acceptance Criteria based on the User Story
 function generateACC() {
     const userStory = document.getElementById('userStory').value.trim();
     if (userStory === "") {
@@ -6,49 +5,38 @@ function generateACC() {
         return;
     }
 
-    // Basic example: Extracting the user story and generating simple ACCs
-    const acc = `
-Scenario: User story is implemented
-Given the user wants to ${userStory}
-When the user performs the relevant actions
-Then the system should execute the expected behavior
-    `;
+    // Extract key parts of the user story
+    const lines = userStory.split("\n");
+    let actor = "the user"; // Default if no role is found
+    let goal = "";
+    let benefit = "";
+    let requirements = [];
+
+    lines.forEach(line => {
+        if (line.toLowerCase().includes("as a")) {
+            actor = line.replace("As a", "").trim();
+        } else if (line.toLowerCase().includes("i want to")) {
+            goal = line.replace("I WANT TO", "").trim();
+        } else if (line.toLowerCase().includes("so i can")) {
+            benefit = line.replace("SO I CAN", "").trim();
+        } else if (line.startsWith("-")) {
+            requirements.push(line.trim());
+        }
+    });
+
+    // Construct Acceptance Criteria
+    let acc = `Scenario: ${goal || "Feature Implementation"}\n`;
+    acc += `Given ${actor} is using the system\n`;
+    acc += `When they attempt to ${goal}\n`;
+    acc += `Then they should be able to achieve ${benefit}\n`;
+
+    if (requirements.length > 0) {
+        acc += `\nAdditional Conditions:\n`;
+        requirements.forEach(req => {
+            acc += `- ${req}\n`;
+        });
+    }
 
     document.getElementById('accOutput').value = acc;
 }
 
-// Function to generate Playwright Test based on the generated ACC
-function generatePlaywright() {
-    const acc = document.getElementById('accOutput').value.trim();
-    if (acc === "") {
-        alert("Please generate the Acceptance Criteria first.");
-        return;
-    }
-
-    // Playwright test template based on the ACC
-    const playwrightTest = `
-test.describe('Generated Test for User Story', () => {
-    test('Test the user story behavior', async ({ page }) => {
-        // Parse the ACC for exact steps
-        // Given the user wants to...
-        // When the user performs the relevant actions...
-        // Then the system should execute the expected behavior
-    });
-});
-    `;
-
-    document.getElementById('playwrightTest').textContent = playwrightTest;
-}
-
-// Function to toggle sidebar and adjust layout
-function toggleSidebar() {
-    const sidebar = document.querySelector('.sidebar');
-    const mainContent = document.querySelector('.main-content');
-    
-    sidebar.classList.toggle('collapsed');
-    if (sidebar.classList.contains('collapsed')) {
-        mainContent.style.marginLeft = "60px";
-    } else {
-        mainContent.style.marginLeft = "250px";
-    }
-}
